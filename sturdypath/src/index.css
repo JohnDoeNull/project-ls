@@ -1,0 +1,55 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body {
+  margin: 0;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Add this custom CSS for the border effects */
+.border-cartoon {
+  @apply border-2 border-black;
+  position: relative;
+}
+
+.border-cartoon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid black;
+  z-index: 1;
+}
+
+/* For the cloud shapes */
+.cloud {
+  @apply bg-white rounded-full;
+  position: relative;
+}
+
+.cloud::before {
+  content: '';
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  top: -30%;
+  left: 15%;
+  @apply bg-white rounded-full;
+}
+
+.cloud::after {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  top: -20%;
+  right: 10%;
+  @apply bg-white rounded-full;
+}
