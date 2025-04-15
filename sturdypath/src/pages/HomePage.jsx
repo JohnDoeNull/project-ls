@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import backgroundImage from '../assets/images/homepagebg.jpg'; // Adjust the path as necessary
+import backgroundImage from '../assets/images/homepagebg3.jpg'; // Adjust the path as necessary
 import Header from '../components/Header';
 
 const HomePage = () => {
