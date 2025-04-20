@@ -9,7 +9,7 @@ dotenv.config({ path: './config/config.env' });
 const VietnamLocation = require('./models/VietnamLocation');
 
 // Connect to DB
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect("mongodb+srv://tuan:tuan@sturdypath.xhl7u2i.mongodb.net/?retryWrites=true&w=majority&appName=sturdypath", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -22,7 +22,7 @@ const importData = async () => {
   try {
     await VietnamLocation.create(locations);
     
-    console.log('Data Imported...'.green.inverse);
+    console.log('Data Imported...');
     process.exit();
   } catch (err) {
     console.error(err);
@@ -34,7 +34,7 @@ const deleteData = async () => {
   try {
     await VietnamLocation.deleteMany();
     
-    console.log('Data Destroyed...'.red.inverse);
+    console.log('Data Destroyed...');
     process.exit();
   } catch (err) {
     console.error(err);

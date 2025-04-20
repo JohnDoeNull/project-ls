@@ -44,13 +44,6 @@ const DashboardPage = () => {
       link: '/explore-vr'
     },
     {
-      id: 'comics',
-      title: 'Comics',
-      description: 'Interactive comics about history, legends, and myths',
-      image: comicsImage, // comicsImage
-      link: '/comics'
-    },
-    {
       id: 'games',
       title: 'Games',
       description: 'Learn about culture through fun and engaging games',

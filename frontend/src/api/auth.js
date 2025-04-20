@@ -70,7 +70,7 @@ const AuthService = {
   getCurrentUser: async () => {
     try {
       const response = await API.get('/auth/me');
-      return response.data;
+      return response.data.data;
     } catch (error) {
       return null; // Not authenticated or error
     }

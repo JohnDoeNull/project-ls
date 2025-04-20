@@ -6,6 +6,8 @@ import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import PrivateRoute from './components/PrivateRoute';
+import VRPage from './pages/VrPage';
+import StoriesPage from './pages/StoriesPage';
 
 function App() {
   return (
@@ -25,10 +27,10 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/profile" element={<div className="p-10 text-center text-2xl">Profile Page Coming Soon</div>} />
-            <Route path="/explore-vr" element={<div className="p-10 text-center text-2xl">Explore VR Coming Soon</div>} />
+            <Route path="/explore-vr" element={<VRPage />} />
             <Route path="/comics" element={<div className="p-10 text-center text-2xl">Comics Coming Soon</div>} />
             <Route path="/games" element={<div className="p-10 text-center text-2xl">Games Coming Soon</div>} />
-            <Route path="/stories" element={<div className="p-10 text-center text-2xl">Stories Coming Soon</div>} />
+            <Route path="/stories" element={<StoriesPage />} />
             <Route path="/chatbot" element={<div className="p-10 text-center text-2xl">Chatbot AI Coming Soon</div>} />
           </Route>
           

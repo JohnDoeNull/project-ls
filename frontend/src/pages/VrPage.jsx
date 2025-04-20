@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import VietnamMap from './VietnamMap';
-import VRExperience from './VRExperience'; // This would be your VR component
+import Header from '../components/Header';
+import VietnamMap from '../components/VietMap';
+import VRExperience from '../components/VrExperience'; // This would be your VR component
+import { UserService } from '../api/services'; // Adjust the import based on your file structure
 import axios from 'axios';
+import backgroundImage from '../assets/images/homepagebg3.jpg';
 
 const VRPage = () => {
   const [locations, setLocations] = useState([]);
@@ -15,17 +18,18 @@ const VRPage = () => {
     const fetchLocations = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('/api/vietnam-vr?category=historical');
+        const response = await UserService.getMapLocations();
         
         // Transform the backend data to match the VietnamMap component format
-        const transformedLocations = response.data.data.map(location => ({
-          id: location._id,
+        const transformedLocations = response.data.map(location => ({
+          // id: location._id,
+          id: new Date().getTime() + Math.random(), // Temporary ID for demo purposes
           name: location.name,
           description: location.shortDescription,
           // Convert absolute pixel coordinates to percentage for the map
           // You may need to adjust these calculations based on your map dimensions
-          x: (location.coordinates.x / 600) * 100, // assuming map width is 600px
-          y: (location.coordinates.y / 800) * 100, // assuming map height is 800px
+          x: (location.coordinates.x / 1) * 1, // assuming map width is 600px
+          y: (location.coordinates.y / 1) * 1, // assuming map height is 800px
           // Store the original data for detail view
           originalData: location
         }));
@@ -51,7 +55,7 @@ const VRPage = () => {
     try {
       // Fetch detailed information about the location
       const response = await axios.get(`/api/vietnam-vr/${location.id}`);
-      setLocationDetails(response.data.data);
+      setLocationDetails(response.data);
     } catch (err) {
       console.error('Error fetching location details:', err);
     }
@@ -94,33 +98,10 @@ const VRPage = () => {
     setLocationDetails(null);
   };
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-96">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="text-center py-12">
-        <p className="text-red-500 mb-4">{error}</p>
-        <button 
-          onClick={() => window.location.reload()}
-          className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-        >
-          Try Again
-        </button>
-      </div>
-    );
-  }
-
-  // Display VR experience if a location is selected and VR mode is active
   if (showVR && selectedLocation) {
     return (
       <VRExperience 
-        locationId={selectedLocation.id} 
+        location={selectedLocation} 
         onExit={exitVRExperience}
         // Pass any additional props needed by your VR component
       />
@@ -128,21 +109,57 @@ const VRPage = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-6 text-green-800">
-        Explore Historical Vietnam
-      </h1>
-      <p className="text-center mb-8 max-w-2xl mx-auto">
-        Click on a location to begin your virtual journey through Vietnam's rich history. 
-        Experience the culture, architecture, and stories from different regions.
-      </p>
+    <div className="min-h-screen flex flex-col"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}>
+      <Header />
       
-      {/* Vietnam Map Component */}
-      <VietnamMap
-        mapImageUrl="/images/vietnam-map.jpg" // Update with your map path
-        locations={locations}
-        onLocationClick={handleLocationClick}
-      />
+      <div className="container mx-auto px-4 py-8 flex-grow">
+        {loading ? (
+          <div className="flex justify-center items-center h-96">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500"></div>
+          </div>
+        ) : error ? (
+          <div className="text-center py-12">
+            <p className="text-red-500 mb-4">{error}</p>
+            <button 
+              onClick={() => window.location.reload()}
+              className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+            >
+              Try Again
+            </button>
+          </div>
+        ) : (
+          <>
+            <h1 className="text-4xl font-bold text-center mb-6 text-white">
+              Explore Historical Vietnam
+            </h1>
+            <p className="text-center mb-8 max-w-2xl mx-auto text-white">
+              Click on a location to begin your virtual journey through Vietnam's rich history. 
+              Experience the culture, architecture, and stories from different regions.
+            </p>
+            
+            {/* Main map container */}
+            <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+              <div className="h-[600px] relative">
+                {/* Vietnam Map Component */}
+                <VietnamMap
+                  mapImageUrl="/images/vietMap.png"
+                  locations={locations}
+                  onLocationClick={handleLocationClick}
+                />
+              </div>
+              <p className="text-sm text-gray-600 mt-2">
+                Click on a marker to view location details and start a VR experience.
+              </p>
+            </div>
+          </>
+        )}
+      </div>
       
       {/* Location Details Modal */}
       {selectedLocation && locationDetails && (
@@ -212,29 +229,6 @@ const VRPage = () => {
           </div>
         </div>
       )}
-      
-      {/* Region Legend */}
-      <div className="mt-8 bg-white p-4 rounded-lg shadow">
-        <h3 className="font-bold mb-2">Regions of Vietnam:</h3>
-        <div className="flex flex-wrap gap-3">
-          <div className="flex items-center">
-            <span className="w-4 h-4 inline-block bg-red-500 rounded-full mr-2"></span>
-            <span>North</span>
-          </div>
-          <div className="flex items-center">
-            <span className="w-4 h-4 inline-block bg-blue-500 rounded-full mr-2"></span>
-            <span>Central</span>
-          </div>
-          <div className="flex items-center">
-            <span className="w-4 h-4 inline-block bg-green-500 rounded-full mr-2"></span>
-            <span>South</span>
-          </div>
-          <div className="flex items-center">
-            <span className="w-4 h-4 inline-block bg-yellow-600 rounded-full mr-2"></span>
-            <span>Highlands</span>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
