@@ -1,0 +1,11 @@
+node version: lastest
+
+cd frontend
+npm i
+chỉnh env về localhost
+npm run dev
+
+cd backend
+npm i
+chỉnh env về localhost
+npm run dev
