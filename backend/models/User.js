@@ -50,6 +50,14 @@ const UserSchema = new mongoose.Schema({
       default: Date.now
     }
   }],
+  games: {
+    tRex: {
+      highScore: {
+        type: Number,
+        default: 0
+      }
+    }
+  },
   createdAt: {
     type: Date,
     default: Date.now

@@ -115,7 +115,6 @@ const locations = [
     vrContent: {
       type: 'matterport',
       videoUrl: 'https://www.youtube.com/watch?v=UnOfVIhzzIs', // Replace with actual video URL
-      matterportId: 'https://map3d.visithcmc.vn/?startscene=scene_1_1_2_dia-dao-cu-chi_(1)&startactions=lookat(120.88,-9.51,120,0,0);' // Replace with actual Matterport ID
     },
     thumbnailImage: '/images/locations/cu-chi-tunnels.jpg',
     mapMarkerImage: '/images/markers/historical-marker.png',
@@ -140,7 +139,6 @@ const locations = [
     vrContent: {
       type: 'matterport',
       videoUrl: 'https://www.youtube.com/watch?v=jy7Z3oYOp7w', // Replace with actual video URL
-      matterportId: 'PeG7VBrkXmJ' // Replace with actual Matterport ID
     },
     thumbnailImage: '/images/locations/dien-bien-phu.jpg',
     mapMarkerImage: '/images/markers/historical-marker.png',

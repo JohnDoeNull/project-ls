@@ -1,7 +1,7 @@
 module.exports = {
     // Application defaults
     jwtSecret: process.env.JWT_SECRET || 'your_jwt_secret',
-    jwtExpire: '24h',
+    jwtExpire: '30d',
     
     // File upload limits
     maxFileSize: 5 * 1024 * 1024, // 5MB

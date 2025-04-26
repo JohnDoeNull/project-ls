@@ -16,11 +16,13 @@ mongoose.connect("mongodb+srv://tuan:tuan@sturdypath.xhl7u2i.mongodb.net/?retryW
 
 // Read JSON files
 const locations = require('./data/locations');
+const User = require('./models/User');
 
 // Import into DB
 const importData = async () => {
   try {
-    await VietnamLocation.create(locations);
+    await User.updateMany({}, { $set: { 'games.tRex.highScore': 0 } });
+    // await VietnamLocation.create(locations);
     
     console.log('Data Imported...');
     process.exit();

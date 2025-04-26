@@ -1,0 +1,31 @@
+.rain-container {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    overflow: hidden;
+  }
+  
+  .symbol-drop {
+    position: absolute;
+    top: -50px;
+    animation-name: symbolFall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    opacity: 0.8;
+  }
+  
+  @keyframes symbolFall {
+    0% {
+      transform: translateY(-50px);
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+  

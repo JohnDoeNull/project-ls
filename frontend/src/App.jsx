@@ -8,6 +8,7 @@ import DashboardPage from './pages/DashboardPage';
 import PrivateRoute from './components/PrivateRoute';
 import VRPage from './pages/VrPage';
 import StoriesPage from './pages/StoriesPage';
+import TRexGamePage from './pages/TrexGamePage';
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
             <Route path="/profile" element={<div className="p-10 text-center text-2xl">Profile Page Coming Soon</div>} />
             <Route path="/explore-vr" element={<VRPage />} />
             <Route path="/comics" element={<div className="p-10 text-center text-2xl">Comics Coming Soon</div>} />
-            <Route path="/games" element={<div className="p-10 text-center text-2xl">Games Coming Soon</div>} />
+            <Route path="/games" element={<TRexGamePage />} />
             <Route path="/stories" element={<StoriesPage />} />
             <Route path="/chatbot" element={<div className="p-10 text-center text-2xl">Chatbot AI Coming Soon</div>} />
           </Route>

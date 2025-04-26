@@ -4,6 +4,7 @@ import VietMap from '../components/VietMap';
 import VideoPlayer from '../components/VideoPlayer';
 import { UserService } from '../api/services';
 import backgroundImage from '../assets/images/homepagebg3.jpg';
+import storiesGif from '../assets/images/stories.gif';
 
 const StoriesPage = () => {
   const [locations, setLocations] = useState([]);
@@ -115,7 +116,7 @@ const StoriesPage = () => {
         {/* Filters removed as requested */}
 
         {/* Main map container */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div className="bg-white rounded-lg shadow-md p-6 mb-6" style={{ backgroundImage: `url(${storiesGif})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
           <div className="h-[600px] relative">
             {loading ? (
               <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75">
